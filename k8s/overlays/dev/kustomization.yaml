@@ -1,5 +1,0 @@
-resources:
-  - ../../base
-images:
-  - name: akshat1414/api-gate-microservice
-    newTag: sha-PLACEHOLDER

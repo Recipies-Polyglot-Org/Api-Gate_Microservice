@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend-apigate
-        image: akshat1414/api-gate-microservice:sha-PLACEHOLDER
+        image: akshat1414/api-gate-microservice:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
