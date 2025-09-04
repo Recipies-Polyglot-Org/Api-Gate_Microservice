@@ -115,6 +115,7 @@
 				</configuration>
 				<executions>
 					<execution>
+						<phase>none</phase>
 					<goals>
 						<goal>check</goal>   <!-- CI runs spotless:check -->
 					</goals>
