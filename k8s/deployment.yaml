@@ -18,6 +18,8 @@ spec:
       - name: backend-apigate
         image: akshat1414/api-gate-microservice:latest
         imagePullPolicy: Always
+        securityContext:
+          allowPrivilegeEscalation: false
         ports:
         - containerPort: 8080
         resources:
@@ -41,3 +43,4 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 3
+
