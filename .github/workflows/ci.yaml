@@ -47,16 +47,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: OWASP Dependency-Check
-        uses: jeremylong/gh-action-dependency-check@v7
+      # OWASP Dependency-Check (official)
+      - name: OWASP Dependency-Check (SCA)
+        uses: dependency-check/Dependency-Check_Action@v4   # or @main
+        env:
+          JAVA_HOME: /opt/jdk   # per action docs when combined with setup-java
         with:
+          project: ${{ github.repository }}
+          path: .
           format: 'SARIF'
+          out: 'reports'
           args: >
             --scan . --failOnCVSS 0
+
       - name: Upload SARIF (SCA)
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: dependency-check-report.sarif
+          sarif_file: reports/dependency-check-report.sarif
+
 
   # 3) SAST (Static analysis)
   sast:
@@ -131,3 +139,4 @@ jobs:
           docker build -t "$IMAGE_NAME:sha-$SHORT_SHA" -t "$IMAGE_NAME:latest" .
           docker push "$IMAGE_NAME:sha-$SHORT_SHA"
           docker push "$IMAGE_NAME:latest"
+
