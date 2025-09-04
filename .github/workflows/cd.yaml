@@ -10,10 +10,10 @@ env:
 
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'master' }}
     concurrency:
       group: deploy-${{ github.ref }}
       cancel-in-progress: true
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'master' }}
     runs-on: [self-hosted, linux, X64]
     steps:
       - uses: actions/checkout@v4
@@ -33,3 +33,4 @@ jobs:
           kubectl set image deployment/$DEPLOYMENT_NAME \
             $CONTAINER_NAME=$IMAGE_REPO:sha-$SHORT
           kubectl rollout status deployment/$DEPLOYMENT_NAME --timeout=300s
+
