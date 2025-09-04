@@ -89,17 +89,39 @@
 
             <!-- Code formatter/lint (CI will run `spotless:check`) -->
             <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.43.0</version>
-                <configuration>
-                    <java>
-                        <googleJavaFormat version="1.17.0"/>
-                        <removeUnusedImports/>
-                        <target>src/**/*.java</target>
-                    </java>
-                </configuration>
-            </plugin>
+				<groupId>com.diffplug.spotless</groupId>
+				<artifactId>spotless-maven-plugin</artifactId>
+				<version>2.43.0</version>
+				<configuration>
+					<!-- Optional: format misc files -->
+					<!--
+					<formats>
+					<format>
+						<includes>
+						<include>**/*.md</include>
+						<include>**/*.yml</include>
+						<include>**/*.yaml</include>
+						</includes>
+						<trimTrailingWhitespace/>
+						<endWithNewline/>
+					</format>
+					</formats>
+					-->
+					<java>
+					<googleJavaFormat version="1.17.0"/>
+					<removeUnusedImports/>
+					<!-- no <target> here -->
+					</java>
+				</configuration>
+				<executions>
+					<execution>
+					<goals>
+						<goal>check</goal>   <!-- CI runs spotless:check -->
+					</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 
             <!-- Style checker (uses built-in Google rules). CI runs `checkstyle:check` -->
             <plugin>
