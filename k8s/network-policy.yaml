@@ -22,10 +22,7 @@ spec:
   - from:
     - namespaceSelector:
         matchLabels:
-          net: prom
-      podSelector:
-        matchLabels:
-          prometheus: kube-prom-kube-prometheus-prometheus
+          kubernetes.io/metadata.name: monitoring
     ports:
     - protocol: TCP
       port: 8080
@@ -55,4 +52,5 @@ spec:
           k8s-app: kube-dns
     ports:
     - protocol: UDP
+
       port: 53
