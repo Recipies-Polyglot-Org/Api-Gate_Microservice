@@ -5,8 +5,14 @@ metadata:
 spec:
   selector:
     app: backend-apigate
+  type: ClusterIP
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: 8080
-  type: ClusterIP
+    - name: metrics
+      protocol: TCP
+      port: 8083          
+      targetPort: 8083
+  
